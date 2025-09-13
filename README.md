@@ -1,4 +1,4 @@
-<h1 align='center'> Hi 👋, I'm Mason </h1>
+<h1 align='center'> Hi 👋, I'm Mason! </h1>
 
 <h2 align='center'> 🎓 I'm a Computer Science major @ UTD </h2>
 
