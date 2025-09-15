@@ -29,5 +29,5 @@
 
 ---                   
 
-[Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=masonliiu&layout=compact&theme=nightowl)   
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=masonliiu&layout=compact&theme=nightowl)   
 ![GitHub Streak](https://streak-stats.demolab.com/?user=masonliiu&theme=nightowl)   
