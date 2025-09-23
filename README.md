@@ -1,5 +1,5 @@
 <h2 align='center'> Computer Science major @ UTD </h2>
-Supreme Executive Director of Recursive Abstraction for Nth-Dimensional Algorithmic Convergence, specializing in blockchain-adjacent Kubernetes and community deployment for cross-fit-platform vibe containerization and heuristic analysis distribution. Former Chief Architect of situational systematic architectural machinery at the global Institute for Situational Dependency Inversion, while leading meta-leads of lead teams at Coporation Z to maintain enterprise-grade regression uptime. My current research focuses on optimizing Fizzbuzz algorithms through quantum-parallel GitHub docking.
+Supreme Executive Director of recursive abstraction for omni-dimensional algorithmic convergence, specializing in blockchain-adjacent Kubernetes and community deployment for cross-platform vibe containerization and heuristic analysis distribution. Former Chief Architect of situational systematic architectural machinery at the global Institute for Dependency Inversion, while leading meta-leads of lead teams at Coporation Corp to maintain enterprise-grade regression uptime. My current research focuses on optimizing Fizzbuzz algorithms through quantum-parallel GitHub docking.
 
 ---
 
