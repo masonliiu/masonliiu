@@ -1,5 +1,5 @@
 <h2 align='center'> Computer Science major @ UTD </h2>
-Executive Director of recursive abstraction for omni-dimensional algorithmic convergence, specializing in blockchain-adjacent contingencies and community deployment for cross-platform vibe containerization and heuristic distribution. Former Chief Architect of situational systematic architectural machinery at the global Institute for Inverse Dependency, while leading meta-leads of lead teams at Coporation Corp to maintain enterprise-grade regression uptime.
+Executive Director of recursive abstraction for omni-dimensional algorithmic convergence, specializing in blockchain-adjacent contingencies and community deployment for cross-platform vibe containerization and heuristic distribution. Former Chief Architect of situational systematic architectural machinery at the global Institute for Inverse Dependency, while leading meta-leads of lead teams at Coporation Corp to maintain enterprise-grade regressive uptime.
 
 ---
 
