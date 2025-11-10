@@ -1,5 +1,5 @@
 <h2 align='center'> Computer Science major @ UTD </h2>
-Executive Director of abstractive omnidimensional algorithmic convergence, specializing in blockchain-adjacent contingencies and community deployment for cross-platform vibe containerization and heuristic distribution. Former Chief Architect of systematic architectural machinery, leading meta-leads of lead teams at Corporation Corp to maintain enterprise-grade regressive uptime.
+Executive Director of abstractive omnidimensional algorithmic convergence, specializing in blockchain-adjacent contingencies and community deployment for cross-platform vibe containerization and heuristic distribution. Former Chief Architect of systematic architectural machinery, leading meta-leads of lead teams at Corporation Tip to maintain enterprise-grade regression.
 
 ---
 
