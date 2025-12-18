@@ -10,7 +10,7 @@ Executive Director of abstractive omnidimensional algorithmic convergence at Cor
 
 
 ### Profile View Counter:
-<img src="https://count.getloli.com/get/@masonliiu?name=masonliiu&theme=booru-mjg&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt="Profile Views Counter" />
+<img src="https://southpark-view-counter.onrender.com/@masonliiu?theme=southpark&padding=7&darkmode=auto"/>
 
 #
 
