@@ -13,5 +13,5 @@ Executive Director of abstractive omnidimensional algorithmic convergence at Cor
 [![View Counter](https://southpark-view-counter.vercel.app/@masonliiu?theme=southpark&padding=7&darkmode=auto)](https://github.com/masonliiu/southpark-view-counter)
 
 #
-![Github Stats](https://greptile-stats.vercel.app/api/widget/masonliiu/stats)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=masonliiu&layout=compact&hide_title=true&count_private=true)
+![masonliiu's Stats](https://github-readme-stats.vercel.app/api?username=masonliiu&theme=vue&show_icons=true&hide_border=true&count_private=true)
+![masonliiu's Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=masonliiu&theme=vue&show_icons=true&hide_border=true&layout=compact)
