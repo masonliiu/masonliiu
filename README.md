@@ -1,6 +1,6 @@
 <h2 align='center'> computer science major @ utd</h2>
 
-Executive Director of abstractive omnidimensional algorithmic convergence at Corporation Tipton (CT), specializing in blockchain-adjacent contingencies and community deployment for cross-platform containerization and heuristic distribution. Former Chief Architect of systematic architectural machinery, leading meta-leads of lead teams to maintain enterprise-grade regression.
+Executive Director of abstractive omnidimensional algorithmic convergence at Corporation Tipton (CT), specializing in blockchain-adjacent contingencies and community deployment for cross-platform containerization and heuristic distribution. Former Chief Architect of systematic architectural machinery, leading meta-leads of lead teams to maintain enterprise-grade devops.
 #
 
 ### connect:
@@ -9,7 +9,7 @@ Executive Director of abstractive omnidimensional algorithmic convergence at Cor
 #
 
 
-### profile views
+### profile views:
 [![View Counter](https://southpark-view-counter.vercel.app/@masonliiu?theme=southpark&padding=7&darkmode=auto)](https://github.com/masonliiu/southpark-view-counter)
 
 
