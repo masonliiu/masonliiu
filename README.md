@@ -1,6 +1,6 @@
 <h2 align='center'> computer science major @ utd</h2>
 
-Executive Director of abstractive omnidimensional algorithmic convergence at Corporation Tipton (CT), specializing in blockchain-adjacent contingencies and community deployment for cross-platform containerization and heuristic distribution. Former Chief Architect of systematic architectural machinery, leading meta-leads of lead teams to maintain enterprise-grade devops.
+Executive Director of abstractive omnidimensional algorithmic convergence at Corporation Tipton (CT), specializing in blockchain-adjacent contingencies and community deployment for cross-platform containerization and heuristic distribution. Former Chief Architect of systematic architectural machinery, leading meta-leads of lead teams to maintain enterprise-grade devops & kubernetes.
 #
 
 ### connect:
