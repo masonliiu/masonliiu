@@ -8,4 +8,4 @@ Executive Director of abstractive omnidimensional algorithmic convergence at Cor
 #
 
 [![View Counter](https://southpark-view-counter.vercel.app/@masonliiu?theme=southpark&padding=7&darkmode=auto)](https://github.com/masonliiu/southpark-view-counter)
-#### ^ how many people have been here!
+#### ^ how many people have been here
