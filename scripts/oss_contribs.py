@@ -132,18 +132,42 @@ def main():
     by_repo = {}
     for repo, pr, merged in rows:
         by_repo.setdefault(repo["full_name"], (repo, []))[1].append((pr, merged))
-    blocks = []
+
+    def img(path, href, alt):
+        return f'<a href="{href}"><img src="{OUT}/{path}" width="49.25%" alt="{html.escape(alt)}"></a>'
+
+    # Each project is a column of stacked pieces: the card, then one strip per merged PR.
+    columns = []
     for full, (repo, prs) in by_repo.items():
         slug = full.replace("/", "-")
         with open(os.path.join(OUT, f"{slug}.svg"), "w") as fh:
             fh.write(repo_card(repo))
-        lines = [f'<a href="{repo["html_url"]}"><img src="{OUT}/{slug}.svg" width="{W}" alt="{html.escape(full)}"></a>']
+        col = [img(f"{slug}.svg", repo["html_url"], full)]
         for i, (pr, merged) in enumerate(prs):
-            with open(os.path.join(OUT, f"{slug}-{pr['number']}.svg"), "w") as fh:
+            name = f"{slug}-{pr['number']}.svg"
+            with open(os.path.join(OUT, name), "w") as fh:
                 fh.write(pr_row(pr, merged, i == len(prs) - 1))
-            lines.append(f'<a href="{pr["html_url"]}"><img src="{OUT}/{slug}-{pr["number"]}.svg" width="{W}" alt="{html.escape(pr["title"])}"></a>')
-        blocks.append("<br>\n".join(lines))
-    body = "\n\n".join(f"<p>\n{b}\n</p>" for b in blocks) if blocks else "_Nothing merged yet._"
+            col.append(img(name, pr["html_url"], pr["title"]))
+        columns.append(col)
+    # Invisible filler so a shorter column keeps the next grid row aligned
+    with open(os.path.join(OUT, "blank.svg"), "w") as fh:
+        fh.write(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="34"/>')
+    blank = f'<img src="{OUT}/blank.svg" width="49.25%" alt="">'
+    gap = f'<img src="{OUT}/gap.svg" width="49.25%" alt="">'
+    with open(os.path.join(OUT, "gap.svg"), "w") as fh:
+        fh.write(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="12"/>')
+
+    with open(os.path.join(OUT, "spacer.svg"), "w") as fh:
+        fh.write('<svg xmlns="http://www.w3.org/2000/svg" width="8" height="1"/>')
+    spacer = f'<img src="{OUT}/spacer.svg" width="1.5%" alt="">'
+    lines = []
+    for i in range(0, len(columns), 2):
+        pair = columns[i:i + 2]
+        if lines:
+            lines.append(gap)
+        for k in range(max(len(c) for c in pair)):
+            lines.append(spacer.join(c[k] if k < len(c) else blank for c in pair))
+    body = "<p>" + "<br>".join(lines) + "</p>" if lines else "_Nothing merged yet._"
 
     text = open("README.md").read()
     text = re.sub(re.escape(START) + r".*?" + re.escape(END), f"{START}\n{body}\n{END}", text, flags=re.S)
