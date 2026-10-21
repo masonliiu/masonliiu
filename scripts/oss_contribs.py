@@ -53,11 +53,27 @@ def text_width(text, size=14):
 
 
 STYLE = """<style>
-.c{fill:#ffffff;stroke:#d0d7de} text{font:14px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#59636e}
+.c{fill:#ffffff;stroke:#d0d7de} .f{fill:#ffffff} .s{stroke:#d0d7de} text{font:14px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#59636e}
 .n{font-weight:600;fill:#0969da} path{fill:#59636e} .m{fill:#8250df} .t{fill:#1f2328}
-@media (prefers-color-scheme: dark){.c{fill:#0d1117;stroke:#3d444d} text{fill:#9198a1} path{fill:#9198a1} .n{fill:#4493f8} .m{fill:#ab7df8} .t{fill:#f0f6fc}}
+@media (prefers-color-scheme: dark){.c{fill:#0d1117;stroke:#3d444d} .f{fill:#0d1117} .s{stroke:#3d444d} text{fill:#9198a1} path{fill:#9198a1} .n{fill:#4493f8} .m{fill:#ab7df8} .t{fill:#f0f6fc}}
 </style>"""
 W = 440
+
+
+def outline(h, top, bottom):
+    """Card edge for one stacked piece: round only the outer corners, and leave the seam open."""
+    r = 6
+    x0, x1, y1 = 0.5, W - 0.5, h - 0.5
+    left = f"M{x0},{y1 if bottom else h}"
+    up = f"L{x0},{r + 0.5} Q{x0},0.5 {x0 + r},0.5 L{x1 - r},0.5 Q{x1},0.5 {x1},{r + 0.5}" if top else f"L{x0},0 M{x1},0"
+    down = f"L{x1},{y1 - r} Q{x1},{y1} {x1 - r},{y1} L{x0 + r},{y1} Q{x0},{y1} {x0},{y1 - r} Z" if bottom else f"L{x1},{h}"
+    if top and bottom:
+        return f'<path class="c" d="M{x0},{y1 - r} {up[1:]} {down}"/>'
+    if top:
+        return f'<path class="c" d="M{x0},{h} {up[1:]} L{x1},{h}"/><rect class="f" x="1" y="{h - 2}" width="{W - 2}" height="2"/>'
+    if bottom:
+        return f'<path class="c" d="M{x0},0 L{x0},{y1 - r} Q{x0},{y1} {x0 + r},{y1} L{x1 - r},{y1} Q{x1},{y1} {x1},{y1 - r} L{x1},0"/>'
+    return f'<path class="c" d="M{x0},0 L{x0},{h} M{x1},0 L{x1},{h}"/><rect class="f" x="1" y="0" width="{W - 2}" height="{h}"/>'
 
 
 def repo_card(repo):
@@ -73,7 +89,7 @@ def repo_card(repo):
         stats += f'<path transform="translate({x:.0f},77)" d="{icon}"/><text x="{x + 21:.0f}" y="90">{label}</text>'
         x += 21 + text_width(label) + 18
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="104" viewBox="0 0 {W} 104">{STYLE}
-<rect class="c" x="0.5" y="0.5" width="{W - 1}" height="103" rx="6"/>
+{outline(104, True, False)}
 <clipPath id="a"><rect x="20" y="16" width="20" height="20" rx="4"/></clipPath>
 <image href="data:image/png;base64,{avatar}" x="20" y="16" width="20" height="20" clip-path="url(#a)"/>
 <text class="n" x="48" y="31">{html.escape(repo["full_name"])}</text>
@@ -82,10 +98,11 @@ def repo_card(repo):
 </svg>"""
 
 
-def pr_row(pr, merged):
+def pr_row(pr, merged, last):
     """One merged PR under its project card. Links to the PR."""
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="34" viewBox="0 0 {W} 34">{STYLE}
-<rect class="c" x="0.5" y="0.5" width="{W - 1}" height="33" rx="6"/>
+{outline(34, False, last)}
+<line class="s" x1="1" y1="0.5" x2="{W - 1}" y2="0.5" stroke-opacity=".6"/>
 <path class="m" transform="translate(16,9)" d="{MERGED}"/>
 <text class="t" x="38" y="22" style="font-size:13px">{html.escape(clip(pr["title"], 50))}</text>
 <text x="{W - 16}" y="22" text-anchor="end" style="font-size:12px">{merged}</text>
@@ -121,9 +138,9 @@ def main():
         with open(os.path.join(OUT, f"{slug}.svg"), "w") as fh:
             fh.write(repo_card(repo))
         lines = [f'<a href="{repo["html_url"]}"><img src="{OUT}/{slug}.svg" width="{W}" alt="{html.escape(full)}"></a>']
-        for pr, merged in prs:
+        for i, (pr, merged) in enumerate(prs):
             with open(os.path.join(OUT, f"{slug}-{pr['number']}.svg"), "w") as fh:
-                fh.write(pr_row(pr, merged))
+                fh.write(pr_row(pr, merged, i == len(prs) - 1))
             lines.append(f'<a href="{pr["html_url"]}"><img src="{OUT}/{slug}-{pr["number"]}.svg" width="{W}" alt="{html.escape(pr["title"])}"></a>')
         blocks.append("<br>\n".join(lines))
     body = "\n\n".join(f"<p>\n{b}\n</p>" for b in blocks) if blocks else "_Nothing merged yet._"

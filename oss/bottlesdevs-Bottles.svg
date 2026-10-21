@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="440" height="104" viewBox="0 0 440 104"><style>
-.c{fill:#ffffff;stroke:#d0d7de} text{font:14px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#59636e}
+.c{fill:#ffffff;stroke:#d0d7de} .f{fill:#ffffff} .s{stroke:#d0d7de} text{font:14px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#59636e}
 .n{font-weight:600;fill:#0969da} path{fill:#59636e} .m{fill:#8250df} .t{fill:#1f2328}
-@media (prefers-color-scheme: dark){.c{fill:#0d1117;stroke:#3d444d} text{fill:#9198a1} path{fill:#9198a1} .n{fill:#4493f8} .m{fill:#ab7df8} .t{fill:#f0f6fc}}
+@media (prefers-color-scheme: dark){.c{fill:#0d1117;stroke:#3d444d} .f{fill:#0d1117} .s{stroke:#3d444d} text{fill:#9198a1} path{fill:#9198a1} .n{fill:#4493f8} .m{fill:#ab7df8} .t{fill:#f0f6fc}}
 </style>
-<rect class="c" x="0.5" y="0.5" width="439" height="103" rx="6"/>
+<path class="c" d="M0.5,104 0.5,6.5 Q0.5,0.5 6.5,0.5 L433.5,0.5 Q439.5,0.5 439.5,6.5 L439.5,104"/><rect class="f" x="1" y="102" width="438" height="2"/>
 <clipPath id="a"><rect x="20" y="16" width="20" height="20" rx="4"/></clipPath>
 <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAADfklEQVR4nOzYW2gcVRgH8O87Z87O7uxutuk22ZLGYrRCTWx0IeCbSFUUqaA++iCIl5eiIkX0VfBJMY8ivvhSRB+8UANiUWxLoRKtWCu0udRcsW0um2Qys7NzZs4cWavTdDfhzHZqsw/zf5tvvjnnxznD2WE17vnQTiHbDWhMAlIlAamSgFRJQKq0HUiL3vqDef6yXCaAA7Tv/tze7QfpTpDhgiBqGR9y/5MnMkhKeZe3406ZBwkpPx3WPz01+8FXk+HlkWf2PfdQrMWLDFo8X1w4898VSuNJzPcCQP9uevjRImNMq4cN7DXiaKKCpFfVJz7Xg1pYEROOKL8GAAVqPz7YodeTTqV0y7KuNczOTI+PXQj7e/b09g8cuGUgnP4ePAvo9Wa6OiEWfq/m7nbdWirFwrrn8VrNSaczlmXNz8+G9YwRdeXUIOlzbfo4MNpQp2NfmPte0TSNUo0QSghBRELIurmma4yOHO88e1bTNZpmWpoVlpaCAw+QQuEWgPDqb8Q1gXU2glYvZbxKtrvXMAxKKamzSCClx7n56pHS6M97smliaMRgJMvk2mX79cPZDz8mqqVSH4y4OrXlw6t/Nhf5T6PuiZPNdTEzUzs2opwuAsh3trwl3E0mnpvfql/Mzimna+FgXEcYZZRJeNAT+r8i3KRPRh8yBshGeDOvL9D6iu73xLsrbri2U1erbx8dQ8ThFwe7Y5/gUX9cT6ToNQ0AXGT0Ir3+4PA3U4eGSoeGSu99OR6X08JJvVnx618qp09Pnhlfe+vZewghw8cuvfGJXz639HRjI0bfyKigh7kYEUG4ZftFUF+qv2rfzS0DwDufjQGiWfW+/XUxfcVpArWQqKCchPfX3fClbtjpH/9YimG4KRAA5CU8wsXGSjGn9XVnCJL6ngAiQhAERauFMWOBmvPywe6X+gY3ntS2bZlHJ+HczY/Zdp+wtwfUwlnZdisU6x2KGDOTvbKzyDPFXT278+0AcllqsdApNMMoKD0RQJ7jNH6btZguc2XXhRVnbtnv6IKnYoNErm/t1EesqwfIBpjwwbXtXMXdUbFsiyDBfz4ZOXedahX8gLqcSokeRYfiOgUEs1ItlcvK6dSg1H1PgJR8/CTIoOEWdtwhATn3bhix/1544XkAuKEbsTRU3vnYQeV0mPzpqUgCUiUBqZKAVElAqrQd6O8AAAD//7D4NFuNCXVnAAAAAElFTkSuQmCC" x="20" y="16" width="20" height="20" clip-path="url(#a)"/>
 <text class="n" x="48" y="31">bottlesdevs/Bottles</text>
