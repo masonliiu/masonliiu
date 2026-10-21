@@ -43,38 +43,53 @@ def clip(text, n):
     return text if len(text) <= n else text[: n - 1].rstrip() + "…"
 
 
-def card(repo, pr, merged):
-    """An SVG in the style of GitHub's pinned-repo cards, readable in light and dark themes."""
+# Rough widths (px) of 14px system-ui glyphs, so stats sit right after their text
+NARROW, WIDE = set("ijlrtf.,:;!|' "), set("mwMW@%")
+
+
+def text_width(text, size=14):
+    w = sum(0.32 if c in NARROW else 0.9 if c in WIDE else 0.62 if c.isupper() or c.isdigit() else 0.55 for c in text)
+    return w * size
+
+
+STYLE = """<style>
+.c{fill:#ffffff;stroke:#d0d7de} text{font:14px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#59636e}
+.n{font-weight:600;fill:#0969da} path{fill:#59636e} .m{fill:#8250df} .t{fill:#1f2328}
+@media (prefers-color-scheme: dark){.c{fill:#0d1117;stroke:#3d444d} text{fill:#9198a1} path{fill:#9198a1} .n{fill:#4493f8} .m{fill:#ab7df8} .t{fill:#f0f6fc}}
+</style>"""
+W = 440
+
+
+def repo_card(repo):
+    """The project, in the style of GitHub's pinned-repo cards. Links to the repo."""
     avatar = base64.b64encode(fetch(repo["owner"]["avatar_url"] + "&s=48", raw=True)).decode()
     lang = repo.get("language") or ""
-    color = LANG_COLORS.get(lang, "#8b949e")
-    desc = html.escape(clip(repo.get("description") or "", 58))
-    title = html.escape(clip(pr["title"], 50))
-    x = 24
-    stats = ""
+    x, stats = 20, ""
     if lang:
-        stats += f'<circle cx="{x + 6}" cy="113" r="6" fill="{color}"/><text x="{x + 18}" y="117">{html.escape(lang)}</text>'
-        x += 30 + 7 * len(lang)
-    stats += f'<path transform="translate({x},105)" d="{STAR}"/><text x="{x + 21}" y="117">{count(repo["stargazers_count"])}</text>'
-    x += 70
-    stats += f'<path transform="translate({x},105)" d="{FORK}"/><text x="{x + 21}" y="117">{count(repo["forks_count"])}</text>'
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="440" height="168" viewBox="0 0 440 168">
-<style>
-.c{{fill:#ffffff;stroke:#d0d7de}} text{{font:14px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#59636e}}
-.n{{font-weight:600;fill:#0969da}} .d{{fill:#59636e}} path{{fill:#59636e}} .m{{fill:#8250df}} .t{{fill:#1f2328}}
-@media (prefers-color-scheme: dark){{.c{{fill:#0d1117;stroke:#3d444d}} text,.d{{fill:#9198a1}} path{{fill:#9198a1}} .n{{fill:#4493f8}} .m{{fill:#ab7df8}} .t{{fill:#f0f6fc}}}}
-</style>
-<rect class="c" x="0.5" y="0.5" width="439" height="167" rx="6"/>
-<clipPath id="a"><rect x="24" y="20" width="22" height="22" rx="5"/></clipPath>
-<image href="data:image/png;base64,{avatar}" x="24" y="20" width="22" height="22" clip-path="url(#a)"/>
-<text class="n" x="56" y="36">{html.escape(repo["full_name"])}</text>
-<text class="d" x="24" y="72" style="font-size:13px">{desc}</text>
+        stats += f'<circle cx="{x + 6}" cy="85" r="6" fill="{LANG_COLORS.get(lang, "#8b949e")}"/><text x="{x + 17}" y="90">{html.escape(lang)}</text>'
+        x += 17 + text_width(lang) + 18
+    for icon, n in ((STAR, repo["stargazers_count"]), (FORK, repo["forks_count"])):
+        label = count(n)
+        stats += f'<path transform="translate({x:.0f},77)" d="{icon}"/><text x="{x + 21:.0f}" y="90">{label}</text>'
+        x += 21 + text_width(label) + 18
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="104" viewBox="0 0 {W} 104">{STYLE}
+<rect class="c" x="0.5" y="0.5" width="{W - 1}" height="103" rx="6"/>
+<clipPath id="a"><rect x="20" y="16" width="20" height="20" rx="4"/></clipPath>
+<image href="data:image/png;base64,{avatar}" x="20" y="16" width="20" height="20" clip-path="url(#a)"/>
+<text class="n" x="48" y="31">{html.escape(repo["full_name"])}</text>
+<text x="20" y="59" style="font-size:13px">{html.escape(clip(repo.get("description") or "", 60))}</text>
 {stats}
-<line x1="0" y1="134" x2="440" y2="134" stroke="#8b949e" stroke-opacity=".25"/>
-<path class="m" transform="translate(24,144)" d="{MERGED}"/>
-<text class="t" x="46" y="156" style="font-size:13px">{title}</text>
-<text x="416" y="156" text-anchor="end" style="font-size:12px">{merged}</text>
-</svg>'''
+</svg>"""
+
+
+def pr_row(pr, merged):
+    """One merged PR under its project card. Links to the PR."""
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="34" viewBox="0 0 {W} 34">{STYLE}
+<rect class="c" x="0.5" y="0.5" width="{W - 1}" height="33" rx="6"/>
+<path class="m" transform="translate(16,9)" d="{MERGED}"/>
+<text class="t" x="38" y="22" style="font-size:13px">{html.escape(clip(pr["title"], 50))}</text>
+<text x="{W - 16}" y="22" text-anchor="end" style="font-size:12px">{merged}</text>
+</svg>"""
 
 
 def main():
@@ -97,13 +112,21 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     for f in os.listdir(OUT):
         os.remove(os.path.join(OUT, f))
-    links = []
+    by_repo = {}
     for repo, pr, merged in rows:
-        name = f'{repo["full_name"].replace("/", "-")}-{pr["number"]}.svg'
-        with open(os.path.join(OUT, name), "w") as fh:
-            fh.write(card(repo, pr, merged))
-        links.append(f'<a href="{pr["html_url"]}"><img src="{OUT}/{name}" width="49%" alt="{html.escape(repo["full_name"])}: {html.escape(pr["title"])}"></a>')
-    body = "\n".join(" ".join(links[i:i + 2]) for i in range(0, len(links), 2)) if links else "_Nothing merged yet._"
+        by_repo.setdefault(repo["full_name"], (repo, []))[1].append((pr, merged))
+    blocks = []
+    for full, (repo, prs) in by_repo.items():
+        slug = full.replace("/", "-")
+        with open(os.path.join(OUT, f"{slug}.svg"), "w") as fh:
+            fh.write(repo_card(repo))
+        lines = [f'<a href="{repo["html_url"]}"><img src="{OUT}/{slug}.svg" width="{W}" alt="{html.escape(full)}"></a>']
+        for pr, merged in prs:
+            with open(os.path.join(OUT, f"{slug}-{pr['number']}.svg"), "w") as fh:
+                fh.write(pr_row(pr, merged))
+            lines.append(f'<a href="{pr["html_url"]}"><img src="{OUT}/{slug}-{pr["number"]}.svg" width="{W}" alt="{html.escape(pr["title"])}"></a>')
+        blocks.append("<br>\n".join(lines))
+    body = "\n\n".join(f"<p>\n{b}\n</p>" for b in blocks) if blocks else "_Nothing merged yet._"
 
     text = open("README.md").read()
     text = re.sub(re.escape(START) + r".*?" + re.escape(END), f"{START}\n{body}\n{END}", text, flags=re.S)
